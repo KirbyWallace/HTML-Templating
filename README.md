@@ -1,7 +1,8 @@
 # HTML-Templating
 A way of building pages by inserting HTML from templates
 
-This is a templating project that I am using to test various templating techniques.  I started last year, in prep for the FPR rewrite, to settle on an approach to developing it.  
+This is a templating project that I am using to test various templating techniques.  I started last year, in prep for the FPR rewrite, to settle on an approach to developing it. 
+
 Last year, I had just about settled on a style that treated every single HTML template the same: Content wrapped in a div with the id "CONTENT_DIV".  With every single template having that same id, I would always have a reference to it, and I could know for certain that I could find it once it had been injected into the page.  So, I'd grab the template, stuff it into the page, and immediately find "CONTENT_DIV" and change it to a unique ID, and call it done.
 
 That changed to a slightly modified version where I took the DIV wrapped content and extracted it's innerHTML, and injected that into the page.  That way I didn't have a bunch of wrapper divs laying about the place.
