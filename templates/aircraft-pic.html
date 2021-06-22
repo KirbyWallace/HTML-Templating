@@ -1,0 +1,25 @@
+﻿<style>
+	#clock {
+		font-family: 'Arial Black';
+		font-size: 3em;
+		color: rgba(255, 0, 0, 0.20);
+		position: absolute;
+		top: 40px;
+		left: 580px;
+	}
+</style>
+
+<img src="images/n387.jpg" width="620" />
+<span id="clock"></span>
+
+<script>
+
+	setInterval(function () {
+		element("clock").innerHTML =
+			(new Date)
+				.toString()
+				.split(" ")[4];
+	}, 100);
+
+</script>
+

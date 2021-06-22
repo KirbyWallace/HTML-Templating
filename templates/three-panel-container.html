@@ -1,0 +1,182 @@
+﻿<!--*********************************************************************************************************************** CSS -->
+<style>
+
+	#main-right-right-content {
+		height: 100%;
+	}
+
+		#main-right-right-content > div {
+			border: 0px;
+			border-radius: 0;
+			border-bottom: 2px solid #011016;
+			border-right: 2px solid #011016;
+			height: 28%;
+			margin-bottom: 10px;
+			padding: 12px;
+			xcolor: white;
+			overflow: auto;
+		}
+
+		#main-right-right-content #top {
+			background-color: #121212;
+		}
+
+		#main-right-right-content #middle {
+			background-color: #121212;
+		}
+
+		#main-right-right-content #bottom {
+			color: green;
+			background-color: #121212;
+		}
+
+	#mid-btn-container {
+		margin-bottom: 14px;
+		text-align: center;
+	}
+
+	#tail-number {
+		font-size: 3em;
+		text-align: center;
+		color: #F33909;
+	}
+
+	b {
+		color: #DFB507;
+	}
+
+	#main-right-right-content #middle button {
+		height: 32px;
+		margin-right: 14px;
+		color: #0057AE;
+		font-weight: bold;
+	}
+
+	#api-call {
+		border: 1px solid silver;
+		padding:8px;
+		color: white;
+		margin-top: 32px;
+
+	}
+
+		#api-call.connected {
+			border: 2px solid green;
+		}
+
+		#api-call.disconnected {
+			border: 2px solid red;
+		}
+
+	#offline {
+		background-color:red;
+		color:white;
+		display:none;
+		float:right;
+		padding-top:3px;
+		padding-bottom:3px;
+		padding-right:6px;
+		padding-left:6px;
+		border-radius: 6px;
+	}
+
+</style>
+
+<!--********************************************************************************************************************** HTML -->
+
+<div id="main-right-right-content">
+	<div id="top">
+		<!-- :template: templates/right-right-top.html -->
+		<b>TEST: Active elements in template can reference elements in sub templates.</b>
+		<br />
+		<br />
+		<div id="tail-number">N387AX</div>
+		<br />
+		Click on the tail number buttons at left.  The script in the parent template (main-left.html) should be able to gain a
+		reference to the #tail-number div in this sub-template, even when the parent template is more than one sub-level up and
+		is not a direct child of the parent template.
+	</div>
+	<div id="middle">
+		<b>TEST: Active elements in Sub-Template can reference elements in Parent Templates.</b>
+		<br />
+		<br />
+		<div id="mid-btn-container">
+			<button>N234AX</button> <button>N468AX</button> <button>N423AX</button> <button>N387AX</button> <button>N486AX</button>
+		</div>
+		<br />
+		Just for fun, I do not cancel the interval timers on the buttons.  Have fun playing with it.
+
+	</div>
+	<div id="bottom">
+		<b>TEST: Can Access Web APIs from .LoadTemplate()</b> <span id="offline">OFF-LINE</span>
+		<div id="api-call">
+		</div>
+	</div>
+</div>
+
+<!--******************************************************************************************************************** SCRIPT -->
+
+<script>
+
+	(() => {
+
+		fadePulse(element("offline"), 0, 1000);
+
+
+		let x = document.getElementsByTagName('button');
+
+		element("middle").querySelectorAll("button").forEach((middleBtn) => {
+			middleBtn.addEventListener("click", () => {
+
+				clearInterval(cancelID);
+
+				element("btn-container").querySelectorAll("button")
+					.forEach((outerBtn) => {
+
+						if (outerBtn.innerHTML == middleBtn.innerHTML) {
+
+							setInterval(function () {
+								outerBtn.style.backgroundColor = x[3].style.backgroundColor ==
+									"rgb(109, 121, 56)"
+									? "rgb(144, 172, 18)"
+									: "rgb(109, 121, 56)";
+							}, 733);
+
+						}
+					})
+
+
+			})
+		})
+
+		setInterval(
+			() => {
+				let response = ""; 
+
+				return new Promise((resolve, reject) => {
+					response = k_Get("http://ping.omni.phish", resolve, reject);
+				})
+
+					.then((response) => {
+
+						localStorage.setItem(response.split("|")[1], response);
+
+						element("api-call").innerHTML = response;
+						element("api-call").classList.add("connected");
+						element("api-call").classList.remove("disconnected");
+						element("offline").style.display = "none";
+					})
+
+					.catch((response) => {
+						element("api-call").innerHTML = "<b style='color:#F54A4A'>Unable to contact Omni from this location - Searching for Signal...</b>";
+						element("api-call").classList.remove("connected");
+						element("api-call").classList.add("disconnected");
+						element("offline").style.display = "inline";
+					});
+
+			},1000
+		);
+
+	})()
+
+</script>

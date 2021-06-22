@@ -1,0 +1,29 @@
+﻿<style>
+	img {
+		border-radius: 16px;
+	}
+
+	.free-text {
+		font-family: arial;
+		line-height: 1.6em;
+	}
+
+	#icon {
+		width:120px; 
+		float: left; 
+		margin-right: 8px; 
+		margin-bottom: 0px;
+	}
+</style>
+
+
+<img id="icon" src="images/wings-bg.png"/>
+
+<span class="free-text">
+	Notice that the IMG style in this template has applied it's CSS to all IMG tags in ANY template. This is not templating 
+	behaviour, but <u>CSS behaviour</u>.  The rounded corners applied to IMG in THIS template, also now apply to IMG tags in 
+	all other containers, including the parent container, even though <u>this</u> template was added <u>AFTER the parent 
+	container was loaded</u>.
+</span>
+
+

@@ -1,0 +1,37 @@
+﻿<!--*********************************************************************************************************************** CSS -->
+<style>
+	#main {
+		display: grid;
+		grid-template-columns: minmax(200px, 200px) 1fr;
+		grid-template-rows: 99.4vh;
+	}
+
+	#main-left {
+		padding: 32px;
+		background-color: #0D0E1A;
+		border-right: 4px solid #9C6700;
+	}
+
+	#main-right {
+		padding: 0px;
+		background-color: #16191D;
+		border: 0;
+	}
+</style>
+
+<!--********************************************************************************************************************** HTML -->
+<div id="main">
+	<div id="main-left"></div>
+	<div id="main-right"></div>
+</div>
+
+<!--******************************************************************************************************************** SCRIPT -->
+<script>
+
+	(() => {
+		document.getElementById("main-left").LoadTemplate("templates/left-buttons.html");
+		document.getElementById("main-right").LoadTemplate("templates/right-grid.html");
+	})();
+
+</script>
+

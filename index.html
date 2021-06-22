@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html lang="en">
+
+<html>
+
+	<head>
+		<title>Templating</title>
+		<link rel="stylesheet" href="css/index.css?version=1.01" />
+		<script src="js/index.js?version=1.01"></script>
+	</head>
+
+	<body>
+		<div id="main-content"></div>
+	</body>
+
+</html>
+
+<script>
+
+	(() => {
+		document.getElementById("main-content")
+			.LoadTemplate("templates/left-right-container.html");
+	})();
+
+</script>
+
+
+

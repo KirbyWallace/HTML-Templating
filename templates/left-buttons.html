@@ -1,0 +1,48 @@
+﻿<style>
+	#btn-container > button {
+		width: 120px;
+		height: 45px;
+		background-color: #9EACC9;
+		color: whitesmoke;
+		font-size: 1.5em;
+		border: 0;
+		border-radius: 6px;
+		margin-bottom: 1em;
+	}
+</style>
+
+<div id="btn-container">
+	<button>N234AX</button>
+	<button>N468AX</button>
+	<button>N423AX</button>
+	<button>N387AX</button>
+	<button>N486AX</button>
+</div>
+
+<script>
+
+	(() => {
+
+		
+		// notice that this does not select the buttons in the main-right-right template.  Because they haven't been loaded
+		// yet.  Otherwise, they would have gotten selected and the timer set on them also.  So, a template loads and executes
+		// it's own scripts before executing the scripts in sub-templates.  Good to know.
+
+		let x = document.getElementsByTagName('button');
+
+		cancelID = setInterval(function () {
+			x[3].style.backgroundColor = x[3].style.backgroundColor ==
+				"rgb(109, 121, 56)"
+				? "rgb(144, 172, 18)"
+				: "rgb(109, 121, 56)";
+		}, 733);
+
+		element("btn-container").querySelectorAll("button").forEach((btn) => {
+			btn.addEventListener("click", () => {
+				element("tail-number").innerHTML = btn.innerHTML;
+			})
+		})
+
+	})()
+
+</script>
